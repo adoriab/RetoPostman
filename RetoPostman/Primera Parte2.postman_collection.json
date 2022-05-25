@@ -16,12 +16,12 @@
 							"pm.test(\"Nos trae como respuesta en el cuerpo The Russian\", function () {\r",
 							"    pm.expect(pm.response.text()).to.include(\"The Russian\");\r",
 							"});\r",
-							"pm.test(\"El tiempo de respuesta es inferior a 300 milisegundos\", function () {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"pm.test(\"El tiempo de respuesta es inferior a 600 milisegundos\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
 							"});\r",
 							"pm.test(\"El libro 2 es type non-fiction\", function(){\r",
 							"    var jsonData = pm.response.json();\r",
-							"    var idBook=jsonData.find(x => x.id == \"2\")\r",
+							"    var idBook=jsonData.find(x => x.id == 2)\r",
 							"    console.log(idBook)\r",
 							"    pm.expect(idBook.type).to.eql(\"non-fiction\");\r",
 							"});"
@@ -138,8 +138,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"No existen libro con id = 20\", function(){\r",
-							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.id).to.eql(20);\r",
+							"    pm.expect(pm.response.text()).to.include(\"No book with id 20\")\r",
 							"});\r",
 							"pm.test(\"Status code is 404\", function () {\r",
 							"    pm.response.to.have.status(404);\r",
@@ -185,7 +184,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"clientName\": \"Prueba\",\r\n   \"clientEmail\": \"pruebaa@example.com\"\r\n}",
+					"raw": "{\r\n   \"clientName\": \"Prueba\",\r\n   \"clientEmail\": \"prueba1@example.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -231,7 +230,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "4a19e4cd5c2aed59fb563d954beeceaabcdca5200c7a953406e7b09a3f9a8700",
+							"value": "c9496b8cb6aacdefd96c28a990c975c79494fc3c9eb4f3dfcc1edbf125d75a09",
 							"type": "string"
 						}
 					]
@@ -240,7 +239,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"bookId\": 5,\r\n  \"customerName\": \"Juliana\"\r\n}",
+					"raw": "{\r\n  \"bookId\": 6,\r\n  \"customerName\": \"Andres\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -281,7 +280,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "4a19e4cd5c2aed59fb563d954beeceaabcdca5200c7a953406e7b09a3f9a8700",
+							"value": "c9496b8cb6aacdefd96c28a990c975c79494fc3c9eb4f3dfcc1edbf125d75a09",
 							"type": "string"
 						}
 					]
@@ -335,7 +334,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "4a19e4cd5c2aed59fb563d954beeceaabcdca5200c7a953406e7b09a3f9a8700",
+							"value": "c9496b8cb6aacdefd96c28a990c975c79494fc3c9eb4f3dfcc1edbf125d75a09",
 							"type": "string"
 						}
 					]
@@ -344,7 +343,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"customerName\": \"Antonia\"\r\n}",
+					"raw": "{\r\n    \"customerName\": \"Francisco\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -352,13 +351,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{Url_1}}/orders/ngQPIeP76a-TuLu9vtw0E",
+					"raw": "{{Url_1}}/orders/iGQ1eCneT5W_oNKqeOsnf",
 					"host": [
 						"{{Url_1}}"
 					],
 					"path": [
 						"orders",
-						"ngQPIeP76a-TuLu9vtw0E"
+						"iGQ1eCneT5W_oNKqeOsnf"
 					]
 				}
 			},
@@ -390,7 +389,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "4a19e4cd5c2aed59fb563d954beeceaabcdca5200c7a953406e7b09a3f9a8700",
+							"value": "c9496b8cb6aacdefd96c28a990c975c79494fc3c9eb4f3dfcc1edbf125d75a09",
 							"type": "string"
 						}
 					]
@@ -442,7 +441,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "4a19e4cd5c2aed59fb563d954beeceaabcdca5200c7a953406e7b09a3f9a8700",
+							"value": "c9496b8cb6aacdefd96c28a990c975c79494fc3c9eb4f3dfcc1edbf125d75a09",
 							"type": "string"
 						}
 					]
@@ -454,13 +453,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{Url_1}}/orders/7qprEmt1xytvY3di3UfE9",
+					"raw": "{{Url_1}}/orders/iGQ1eCneT5W_oNKqeOsnf",
 					"host": [
 						"{{Url_1}}"
 					],
 					"path": [
 						"orders",
-						"7qprEmt1xytvY3di3UfE9"
+						"iGQ1eCneT5W_oNKqeOsnf"
 					]
 				}
 			},
@@ -473,11 +472,11 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Verifica que se elimino al no traer respuesta\", function () {\r",
+							"pm.test(\"No se encontro el id de la orden\", function () {\r",
 							"    pm.response.to.have.status(404);\r",
 							"});\r",
-							"pm.test(\"El tiempo de respuesta es menor de 200ms\", function () {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"pm.test(\"El tiempo de respuesta es menor de 300ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -490,7 +489,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "4a19e4cd5c2aed59fb563d954beeceaabcdca5200c7a953406e7b09a3f9a8700",
+							"value": "c9496b8cb6aacdefd96c28a990c975c79494fc3c9eb4f3dfcc1edbf125d75a09",
 							"type": "string"
 						}
 					]
@@ -502,13 +501,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{Url_1}}/orders/7qprEmt1xytvY3di3UfE9",
+					"raw": "{{Url_1}}/orders/iGQ1eCneT5W_oNKqeOsnf",
 					"host": [
 						"{{Url_1}}"
 					],
 					"path": [
 						"orders",
-						"7qprEmt1xytvY3di3UfE9"
+						"iGQ1eCneT5W_oNKqeOsnf"
 					]
 				}
 			},
@@ -521,8 +520,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Nos trae como respuesta en el cuerpo The Russian\", function () {\r",
-							"    pm.expect(pm.response.text()).to.include(\"The Russian\");\r",
+							"pm.test(\"Lista de Ordenes\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Antonia\");\r",
 							"});\r",
 							"pm.test(\"El tiempo de respuesta es inferior a 300 milisegundos\", function () {\r",
 							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
