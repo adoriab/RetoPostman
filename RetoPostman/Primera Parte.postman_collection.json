@@ -1,0 +1,568 @@
+{
+	"info": {
+		"_postman_id": "ce101ca6-d47f-4d3d-95a2-c96df3e8552f",
+		"name": "Primera Parte",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19927057"
+	},
+	"item": [
+		{
+			"name": "Obtener Libros Camino Feliz",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Nos trae como respuesta en el cuerpo The Russian\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"The Russian\");\r",
+							"});\r",
+							"pm.test(\"El tiempo de respuesta es inferior a 300 milisegundos\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							"pm.test(\"El libro 2 es type non-fiction\", function(){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var idBook=jsonData.find(x => x.id == \"2\")\r",
+							"    console.log(idBook)\r",
+							"    pm.expect(idBook.type).to.eql(\"non-fiction\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Url_1}}/books",
+					"host": [
+						"{{Url_1}}"
+					],
+					"path": [
+						"books"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "non-fiction",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Libros Camino No Feliz",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"La respuesta tiene pride and prejudice\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"pride and prejudice\");\r",
+							"});\r",
+							"pm.test(\"El libro con id = 5 es type= romance\", function(){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var idBook=jsonData.find(x => x.id == \"5\")\r",
+							"    console.log(idBook)\r",
+							"    pm.expect(idBook.type).to.eql(\"romance\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Url_1}}/books",
+					"host": [
+						"{{Url_1}}"
+					],
+					"path": [
+						"books"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Libro Camino Feliz",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"El tiempo de respuesta es inferior a 300 milisegundos\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							"pm.test(\"El precio del libro es 12.98\", function(){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.price).to.eql(12.98);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Url_1}}/books/1",
+					"host": [
+						"{{Url_1}}"
+					],
+					"path": [
+						"books",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Libro Camino No Feliz",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"No existen libro con id = 20\", function(){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(20);\r",
+							"});\r",
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Url_1}}/books/20",
+					"host": [
+						"{{Url_1}}"
+					],
+					"path": [
+						"books",
+						"20"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generar Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Recibe un estado 201 para confirmar Token\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"clientName\": \"Prueba\",\r\n   \"clientEmail\": \"pruebaa@example.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Url_1}}/api-clients/",
+					"host": [
+						"{{Url_1}}"
+					],
+					"path": [
+						"api-clients",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar pedido camino feliz",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Nos trae como respuesta un true en el cuerpo\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"true\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"El tiempo de respuesta es inferior a 300 milisegundos\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "4a19e4cd5c2aed59fb563d954beeceaabcdca5200c7a953406e7b09a3f9a8700",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"bookId\": 5,\r\n  \"customerName\": \"Juliana\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Url_1}}/orders",
+					"host": [
+						"{{Url_1}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar pedido camino no feliz",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Confirmación de error\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"error\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "4a19e4cd5c2aed59fb563d954beeceaabcdca5200c7a953406e7b09a3f9a8700",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"bookId\": 2,\r\n  \"customerName\": \"Ana\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Url_1}}/orders",
+					"host": [
+						"{{Url_1}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar pedido camino feliz",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verificamos que si se actualizo\", function () {\r",
+							"    pm.expect(pm.response.text()).to.eql(\"\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"El tiempo de respuesta es inferior a 300 milisegundos\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "4a19e4cd5c2aed59fb563d954beeceaabcdca5200c7a953406e7b09a3f9a8700",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"customerName\": \"Antonia\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Url_1}}/orders/ngQPIeP76a-TuLu9vtw0E",
+					"host": [
+						"{{Url_1}}"
+					],
+					"path": [
+						"orders",
+						"ngQPIeP76a-TuLu9vtw0E"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar pedido camino no feliz",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"La respuesta contiene un Error\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Error\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"El tiempo de respuesta es inferior a 300 milisegundos\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "4a19e4cd5c2aed59fb563d954beeceaabcdca5200c7a953406e7b09a3f9a8700",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"customerName\": \"Antonia\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Url_1}}/orders",
+					"host": [
+						"{{Url_1}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar un pedido camino feliz",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verifica que se elimino al no traer respuesta\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"pm.test(\"El tiempo de respuesta es menor de 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "4a19e4cd5c2aed59fb563d954beeceaabcdca5200c7a953406e7b09a3f9a8700",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Url_1}}/orders/7qprEmt1xytvY3di3UfE9",
+					"host": [
+						"{{Url_1}}"
+					],
+					"path": [
+						"orders",
+						"7qprEmt1xytvY3di3UfE9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar un pedido camino no feliz",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verifica que se elimino al no traer respuesta\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"pm.test(\"El tiempo de respuesta es menor de 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "4a19e4cd5c2aed59fb563d954beeceaabcdca5200c7a953406e7b09a3f9a8700",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Url_1}}/orders/7qprEmt1xytvY3di3UfE9",
+					"host": [
+						"{{Url_1}}"
+					],
+					"path": [
+						"orders",
+						"7qprEmt1xytvY3di3UfE9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener los pedidos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Nos trae como respuesta en el cuerpo The Russian\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"The Russian\");\r",
+							"});\r",
+							"pm.test(\"El tiempo de respuesta es inferior a 300 milisegundos\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "4a19e4cd5c2aed59fb563d954beeceaabcdca5200c7a953406e7b09a3f9a8700",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"bookId\": 8,\r\n  \"customerName\": \"Ana\"\r\n}"
+				},
+				"url": {
+					"raw": "{{Url_1}}/orders",
+					"host": [
+						"{{Url_1}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

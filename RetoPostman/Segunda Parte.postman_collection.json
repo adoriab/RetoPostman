@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "bd28930b-dd17-432c-bede-d7b57668e705",
+		"name": "Segunda Parte",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19927057"
+	},
+	"item": [
+		{
+			"name": "Listado de Personajes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Se muesta un resultado obtenido\", function(){\r",
+							"    var jsonDta = pm.response.json();\r",
+							"    var idrick=jsonDta.results.find(x => x.id==12)\r",
+							"    console.log(idrick)\r",
+							"    pm.expect(idrick.name).to.eql(\"Alexander\")\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Url_2}}/character",
+					"host": [
+						"{{Url_2}}"
+					],
+					"path": [
+						"character"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Personajes por Pagina",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Se muesta un resultado obtenido\", function(){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var idper=jsonData.results.find(x => x.id==169)\r",
+							"    console.log(idper)\r",
+							"    pm.expect(idper.name).to.eql(\"Jacob\")\r",
+							"});\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Url_2}}/character/?page=9",
+					"host": [
+						"{{Url_2}}"
+					],
+					"path": [
+						"character",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener personaje por Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"El personaje es de species Human\", function(){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.species).to.eql(\"Human\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Url_2}}/character/12",
+					"host": [
+						"{{Url_2}}"
+					],
+					"path": [
+						"character",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener personajes por Id no existentes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"La respuesta es un array vacío\", function(){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var idP=jsonData.find(x => x.id == 827,900,999)\r",
+							"    console.log(idP)\r",
+							"    pm.expect(idP).to.eql();\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Url_2}}/character/827,900,999",
+					"host": [
+						"{{Url_2}}"
+					],
+					"path": [
+						"character",
+						"827,900,999"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
